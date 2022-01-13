@@ -1,8 +1,7 @@
 const redis = require('redis');
 const { configRedis } = require('../config/configRedis');
 const logger = require('../config/logger');
-// connect to redis
-// const redisClient = redis.createClient(configRedis.redisPort, configRedis.redisHost);
+
 const redisClient = redis.createClient({ host: configRedis.redisPort, port: configRedis.redisHost });
 
 redisClient.connect().then(() =>{logger.info("Redis connect success!!!")} );
