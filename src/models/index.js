@@ -1,0 +1,9 @@
+module.exports.Token = require('./token.model');
+module.exports.User = require('./user.model');
+module.exports.Account = require('./account.model');
+module.exports.JWT = require('./jwt.model');
+module.exports.Order = require('./order.model');
+module.exports.Product = require('./product.model');
+module.exports.Review = require('./review.model');
+module.exports.Message = require('./message.model');
+module.exports.Room = require('./room.model');
