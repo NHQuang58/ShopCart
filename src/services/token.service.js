@@ -57,7 +57,7 @@ const saveTokenSQL = async (token, userId, expires, type) => {
 };
 
 const saveTokenRedis = async (token, userID, expires, type) => {
-  const key = `${userID.toString()}${type}`;
+  const key = `${userID.toString()}${type}`; //eg. 1refresh
   // await redisClient.set(key, JSON.stringify({ token, expires, type }));
   await redisClient.set(key, token);
   return token;

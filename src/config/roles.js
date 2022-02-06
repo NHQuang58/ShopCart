@@ -10,6 +10,7 @@ const allRoles = {
     'manageOrders',
     'getOrders',
     'uploadImage',
+    'uploadVideo',
     'getRoom',
   ],
 };

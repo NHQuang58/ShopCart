@@ -19,8 +19,14 @@ const fileFilter = (req, file, cb) => {
     cb(new Error('Invalid file type, only JPEG and PNG is allowed!'), false);
   }
 };
-
-const upload = multer({
+const fileFilterVideo = (req, file, cb) => {
+  if (file.mimetype === 'video/mp4') {
+    cb(null, true);
+  } else {
+    cb(new Error('Invalid file type, only mp4!'), false);
+  }
+};
+const uploadImageService = multer({
   fileFilter,
   storage: multerS3({
     acl: 'public-read',
@@ -34,5 +40,21 @@ const upload = multer({
     },
   }),
 });
-
-module.exports = upload;
+const uploadVideoService = multer({
+  fileFilter: fileFilterVideo,
+  storage: multerS3({
+    acl: 'public-read',
+    s3,
+    bucket: configAWS.BUCKET,
+    metadata(req, file, cb) {
+      cb(null, { fieldName: 'TESTING_METADATA' });
+    },
+    key(req, file, cb) {
+      cb(null, `${Date.now().toString()}${path.extname(file.originalname)}`);
+    },
+  }),
+});
+module.exports = {
+  uploadImageService,
+  uploadVideoService,
+};
